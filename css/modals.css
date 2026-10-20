@@ -1,0 +1,501 @@
+/* ==========================================================================
+   7 Wonders - Modals & Overlays
+   Card actions, Military arena, End-game podium, and Illustrated Rules
+   ========================================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: modalFadeIn 0.25s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-card {
+  background: var(--bg-surface-elevated);
+  border: var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), var(--gold-shadow);
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 16px 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: var(--border-glass);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--gold-light);
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: #fff;
+}
+
+.modal-body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-top: var(--border-glass);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Card Action Specifics */
+.action-card-summary {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: var(--border-glass);
+}
+
+.action-card-summary h4 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.action-card-summary p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.action-cost-details, .action-chain-details {
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.trade-cost-breakdown {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px dashed var(--gold-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.action-choices-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-btn-large {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-family: inherit;
+  text-align: left;
+}
+
+.action-btn-large span {
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn-large small {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.action-btn-large:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.btn-build-card:not(:disabled) {
+  border-color: #22c55e;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(0, 0, 0, 0.4));
+}
+.btn-build-card:hover:not(:disabled) {
+  border-color: #4ade80;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(0, 0, 0, 0.5));
+}
+
+.btn-build-wonder:not(:disabled) {
+  border-color: var(--gold-primary);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(0, 0, 0, 0.4));
+}
+.btn-build-wonder:hover:not(:disabled) {
+  border-color: var(--gold-light);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(0, 0, 0, 0.5));
+}
+
+.btn-discard-card:not(:disabled) {
+  border-color: #94a3b8;
+  background: linear-gradient(135deg, rgba(148, 163, 184, 0.15), rgba(0, 0, 0, 0.4));
+}
+.btn-discard-card:hover:not(:disabled) {
+  border-color: #cbd5e1;
+}
+
+.action-btn-large:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Military Modal Styling */
+.military-battles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.military-battle-card {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius-md);
+  border: var(--border-glass);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.human-battle-card {
+  border-color: var(--gold-primary);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.battle-player-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.battle-shields {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.battle-neighbors-clash {
+  display: flex;
+  gap: 16px;
+}
+
+.clash-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.clash-side small {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.win-token {
+  background: #15803d;
+  color: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.loss-token {
+  background: #991b1b;
+  color: #fee2e2;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tie-token {
+  background: #334155;
+  color: #cbd5e1;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* ================= End Game Modal ================= */
+.modal-wide {
+  max-width: 900px;
+}
+
+.winner-banner {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.winner-trophy {
+  font-size: 48px;
+  filter: drop-shadow(0 0 16px var(--gold-primary));
+  animation: bounceTrophy 1.5s infinite;
+}
+
+@keyframes bounceTrophy {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.winner-banner h2 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  color: var(--gold-light);
+  margin-top: 6px;
+}
+
+.winner-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.endgame-podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  margin: 16px 0;
+  height: 180px;
+}
+
+.podium-pillar {
+  width: 140px;
+  background: rgba(0, 0, 0, 0.4);
+  border: var(--border-glass);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.podium-first {
+  height: 160px;
+  background: linear-gradient(to top, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.05));
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.podium-second {
+  height: 130px;
+  border-color: #94a3b8;
+}
+
+.podium-third {
+  height: 100px;
+  border-color: #b45309;
+}
+
+.podium-avatar { font-size: 24px; margin-bottom: 4px; }
+.podium-name { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.podium-score { font-size: 16px; font-weight: 800; color: var(--gold-light); }
+.podium-rank { font-size: 12px; color: var(--text-muted); }
+
+/* Scorecard Table */
+.scorecard-table-wrap {
+  overflow-x: auto;
+}
+
+.scorecard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: center;
+}
+
+.scorecard-table th, .scorecard-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scorecard-table th {
+  background: rgba(0, 0, 0, 0.4);
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--gold-light);
+}
+
+.scorecard-table td:first-child {
+  text-align: left;
+}
+
+.row-human {
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.row-winner {
+  font-weight: 700;
+}
+
+.you-tag {
+  background: var(--gold-primary);
+  color: #000;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 6px;
+}
+
+.th-total, .td-total {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--gold-light);
+  font-size: 15px;
+}
+
+/* ================= Rules Guide Modal ================= */
+.rules-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.rules-container h4 {
+  font-family: var(--font-serif);
+  color: var(--gold-light);
+  font-size: 16px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+}
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.rule-box {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: var(--border-glass);
+}
+
+.rule-box strong {
+  color: #fff;
+}
+
+/* Settings Modal Controls */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+
+.form-control {
+  background: rgba(0, 0, 0, 0.4);
+  border: var(--border-glass);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+  color: #000;
+  font-weight: 700;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: var(--border-glass);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

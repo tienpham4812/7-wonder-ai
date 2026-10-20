@@ -1,0 +1,587 @@
+/* ==========================================================================
+   7 Wonders - Ancient World Design System
+   Rich Greek & Egyptian marble dark theme, gold foil accents, glassmorphism
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --bg-dark: #0a0c10;
+  --bg-surface: #121620;
+  --bg-surface-elevated: #1a202c;
+  --bg-card-overlay: rgba(26, 32, 46, 0.85);
+
+  --gold-primary: #f59e0b;
+  --gold-light: #fbbf24;
+  --gold-dark: #b45309;
+  --gold-glow: rgba(245, 158, 11, 0.35);
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Card Colors */
+  --card-brown: #78350f;
+  --card-brown-light: #9a3412;
+  --card-gray: #475569;
+  --card-gray-light: #64748b;
+  --card-blue: #1e3a8a;
+  --card-blue-light: #2563eb;
+  --card-yellow: #ca8a04;
+  --card-yellow-light: #eab308;
+  --card-red: #991b1b;
+  --card-red-light: #dc2626;
+  --card-green: #065f46;
+  --card-green-light: #059669;
+  --card-purple: #581c87;
+  --card-purple-light: #7e22ce;
+
+  /* Borders & Shadows */
+  --border-gold: 1px solid rgba(245, 158, 11, 0.4);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  --gold-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+
+  /* Typography */
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 10% 90%, rgba(30, 58, 138, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(153, 27, 27, 0.12) 0%, transparent 50%);
+  overflow-x: hidden;
+}
+
+/* ================= Top Bar HUD ================= */
+.top-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: rgba(18, 22, 32, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: var(--border-gold);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hud-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-logo-icon {
+  font-size: 26px;
+  filter: drop-shadow(0 0 8px var(--gold-primary));
+}
+
+.hud-brand h1 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #fff 30%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hud-game-status {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hud-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--border-glass);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.age-pill {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(180, 83, 9, 0.4));
+  border: var(--border-gold);
+  color: var(--gold-light);
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.dir-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #38bdf8;
+}
+
+.hud-player-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-sm);
+  border: var(--border-glass);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stat-gold { color: #fde047; }
+.stat-military { color: #f87171; }
+.stat-vp { color: #4ade80; }
+.stat-science { color: #38bdf8; }
+
+.hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: var(--border-glass);
+  color: var(--text-main);
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hud-btn:hover {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: var(--gold-primary);
+  transform: translateY(-1px);
+}
+
+.active-music {
+  background: rgba(56, 189, 248, 0.2) !important;
+  border-color: #38bdf8 !important;
+  color: #38bdf8 !important;
+}
+
+/* ================= Main App Layout ================= */
+.main-game-layout {
+  display: flex;
+  flex: 1;
+  padding: 16px 24px;
+  gap: 20px;
+  max-width: 1700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.left-sidebar {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.center-arena {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.right-sidebar {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ================= Neighbor Cards Dock ================= */
+.neighbor-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: var(--border-glass);
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.neighbor-card:hover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+  transform: translateY(-2px);
+}
+
+.neighbor-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.neighbor-avatar {
+  font-size: 24px;
+}
+
+.neighbor-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.neighbor-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.neighbor-name {
+  font-size: 15px;
+  color: var(--gold-light);
+}
+
+.neighbor-wonder-strip {
+  border-radius: var(--radius-sm);
+  background-size: cover;
+  background-position: center;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  margin-bottom: 10px;
+}
+
+.stage-tag {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+}
+
+.neighbor-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+.neighbor-trade-section small {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.neighbor-trade-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.trade-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+}
+
+.empty-trade {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ================= Draft Hand Area ================= */
+.draft-hand-container {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: var(--border-gold);
+  padding: 16px 20px;
+  box-shadow: var(--glass-shadow);
+  position: relative;
+}
+
+.draft-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.draft-section-header h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.draft-instruction {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.draft-cards-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 4px 14px 4px;
+  min-height: 250px;
+}
+
+/* ================= City Columns Area ================= */
+.player-city-section {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: var(--border-glass);
+  padding: 16px 20px;
+}
+
+.city-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.city-section-header h3 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--text-main);
+}
+
+.player-tabs-bar {
+  display: flex;
+  gap: 6px;
+}
+
+.player-tab-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: var(--border-glass);
+  color: var(--text-muted);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.player-tab-btn.active-tab {
+  background: var(--gold-glow);
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.player-city-columns {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.city-column {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.city-col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.col-count {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1px 5px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+.city-col-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.city-card-item {
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.city-card-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.city-card-benefit {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.city-col-empty {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 30px;
+  font-style: italic;
+}
+
+/* ================= Game Log Drawer ================= */
+.game-log-panel {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: var(--border-glass);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  max-height: 500px;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 10px;
+}
+
+.log-list {
+  list-style: none;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.log-item {
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid #64748b;
+}
+
+.log-time {
+  font-family: monospace;
+  color: var(--text-dim);
+  font-size: 10px;
+  margin-right: 4px;
+}
+
+.log-system { border-color: var(--gold-primary); color: #fef08a; }
+.log-build { border-color: #3b82f6; }
+.log-wonder { border-color: #eab308; }
+.log-discard { border-color: #94a3b8; }
+.log-trade { border-color: #f97316; }
+.log-military { border-color: #ef4444; }
+.log-reward { border-color: #10b981; }
+
+/* ================= Toast Notification ================= */
+.game-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  background: rgba(18, 22, 32, 0.95);
+  border: var(--border-gold);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), var(--gold-shadow);
+  color: var(--gold-light);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.game-toast.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .main-game-layout {
+    flex-direction: column;
+  }
+  .left-sidebar, .right-sidebar {
+    width: 100%;
+  }
+  .player-city-columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
